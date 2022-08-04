@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
    "fmt"
+//    "strconv"
    "log"
    "os"
    _ "github.com/lib/pq"
@@ -42,17 +43,17 @@ func main() {
 		return indexHandler(c, db)
 	})
 
-	// app.Post("/", func(c *fiber.Ctx) error {
-	// 	return postHandler(c, db)
-	// })
+	app.Post("/", func(c *fiber.Ctx) error {
+		return postHandler(c, db)
+	})
 
-	// app.Put("/update", func(c *fiber.Ctx) error {
-	// 	return putHandler(c, db)
-	// })
+	app.Put("/update", func(c *fiber.Ctx) error {
+		return putHandler(c, db)
+	})
 
-	// app.Delete("/delete", func(c *fiber.Ctx) error {
-	// 	return deleteHandler(c, db)
-	// })
+	app.Delete("/delete", func(c *fiber.Ctx) error {
+		return deleteHandler(c, db)
+	})
 
    port := os.Getenv("PORT")
    if port == "" {
@@ -76,17 +77,53 @@ func indexHandler(c *fiber.Ctx, db *sql.DB) error {
 		rows.Scan(&res)
 		task = append(task, res)
 	}
+	fmt.Println(task)
 	return c.Render("index", fiber.Map{
 		"Task": task,
 	})
  }
 
-//  func postHandler(c *fiber.Ctx) error {
-// 	return c.SendString("Hello")
-//  }
-//  func putHandler(c *fiber.Ctx) error {
-// 	return c.SendString("Hello")
-//  }
-//  func deleteHandler(c *fiber.Ctx) error {
-// 	return c.SendString("Hello")
-//  }
+//  Post simpan data
+type task struct {
+	Task string
+	Assignee int
+	Deadline string
+	Status int
+ }
+ 
+ func postHandler(c *fiber.Ctx, db *sql.DB) error {
+	newTask := task{}
+	if err := c.BodyParser(&newTask); err != nil {
+		log.Printf("An error occured: %v", err)
+		return c.SendString(err.Error())
+	}
+	// fmt.Printf("%v", newTask)
+	if newTask.Task != "" {
+		fmt.Println(newTask.Task)
+		fmt.Println(newTask.Assignee)
+		fmt.Println(newTask.Deadline)
+		_, err := db.Exec("INSERT into task (task,assignee,deadline,status) VALUES ($1,$2,$3,$4)", newTask.Task, newTask.Assignee, newTask.Deadline, newTask.Status)
+		if err != nil {
+			log.Fatalf("Gagal simpan, query error : %v", err)
+		}
+	}
+ 
+	return c.Redirect("/")
+ }
+
+ func putHandler(c *fiber.Ctx, db *sql.DB) error {
+	olditem := c.Query("olditem")
+	newtask := c.Query("newtask")
+	newassignee := c.Query("newassignee")
+	newdeadline := c.Query("newdeadline")
+	newstatus := c.Query("newstatus")
+
+	db.Exec("UPDATE todos SET task=$1, assignee=$2, deadline=$3, status=$4 WHERE item=$5", newtask, newassignee, newdeadline, newstatus,  olditem)
+	return c.Redirect("/")
+ }
+
+ func deleteHandler(c *fiber.Ctx, db *sql.DB) error {
+	todoToDelete := c.Query("item")
+	db.Exec("DELETE from task WHERE id=$1", todoToDelete)
+	return c.SendString("deleted")
+ }

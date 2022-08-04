@@ -28,10 +28,14 @@
        <div class="row m-1 p-3">
            <div class="col col-11 mx-auto">
                <form action="/" method="POST" class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
-                   <div class="col">
-                       <input name="Item" class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" placeholder="Tambah baru ..">
-                   </div>
-                   <div class="col-auto px-0 mx-0 mr-2">
+                   <div class="row m-1 p-3">
+                       <input name="Task" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
+                       <input name="Assignee" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
+                       <input name="Deadline" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
+                       <input name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status ..">
+
+                    </div>
+                   <div class="row">
                        <button type="submit" class="btn btn-primary">Tambah</button>
                    </div>
                </form>

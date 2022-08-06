@@ -25,7 +25,7 @@
            </div>
        </div>
        <!-- Create todo section -->
-       <div class="row m-1 p-3">
+       <div class="row m-1 p-3" id="form-id">
            <div class="col col-11 mx-auto" id="form-id">
                <form action="/" method="POST" class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
                    <div class="row m-1 p-3">
@@ -71,7 +71,7 @@
                                     <td>{{.Id}}</td>
                                     <td>
                                         <i onclick="updateDb('{{.Id}}')" class="fa fa-pencil text-warning btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
-                                        <i onclick="removeFromDb('{{.}}')" class="fa fa-trash-o text-danger btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i>
+                                        <i onclick="removeFromDb('{{.Id}}')" class="fa fa-trash-o text-danger btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i>
                                     </td>
                                 </tr>
                                 {{end}}

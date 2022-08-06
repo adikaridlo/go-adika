@@ -1,3 +1,22 @@
 <!-- {{range.Task}} -->
-<h1>{{Task.Id}}</h1>
+<center>
+    <h1>{{.Task}}</h1>
+</center>
+<div class="row m-1 p-3">
+    <div class="col col-11 mx-auto" id="form-id">
+        <form action="/update" method="POST" class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
+            <div class="row m-1 p-3">
+                <input name="Id" type="hidden" value="{{.Id}}">
+                <input name="Task" value="{{.Task}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
+                <input name="Assignee" value="{{.Assignee}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
+                <input name="Deadline" value="{{.Deadline}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
+                <input name="Status" value="{{.Status}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status ..">
+
+             </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
 <!-- {{end}} -->

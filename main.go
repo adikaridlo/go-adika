@@ -76,10 +76,13 @@ func main() {
 		return postHandler(c, db)
 	})
 
-	app.Get("/update", func(c *fiber.Ctx) error {
+	app.Put("/update", func(c *fiber.Ctx) error {
 		return putHandler(c, db)
 	})
 
+	app.Post("/update", func(c *fiber.Ctx) error {
+		return updateHandler(c, db)
+	})
 	app.Delete("/delete", func(c *fiber.Ctx) error {
 		return deleteHandler(c, db)
 	})
@@ -138,28 +141,47 @@ func postHandler(c *fiber.Ctx, db *sql.DB) error {
 func putHandler(c *fiber.Ctx, db *sql.DB) error {
 	id := c.Query("id")
 	// var id string = "1"
-	data := Edit{}
-	rows, err := db.Query("SELECT id,task,assignee,deadline,status FROM task WHERE id = $1", id)
-	fmt.Println(id)
+	result := make([]*task, 0)
+	rows, err := db.Query("SELECT * FROM task WHERE id = $1", id)
 	defer rows.Close()
 	if err != nil {
 		log.Fatalln(err)
 		c.JSON("An error occured")
 	}
 	for rows.Next() {
-		// res := new(Edit)
-		rows.Scan(&data.Id, &data.Task, &data.Assignee, &data.Deadline, &data.Status)
-		// result = append(result, res)
+		res := new(task)
+		rows.Scan(&res.Id, &res.Task, &res.Assignee, &res.Deadline, &res.Status)
+		result = append(result, res)
 	}
 
-	return c.JSON(&fiber.Map{
-		"success": false,
-		"message": "Successfully fetched product",
-		"product": data,
-	})
-	// return c.Render("update", fiber.Map{
-	// 	"Task": data,
+	// return c.JSON(&fiber.Map{
+	// 	"success": false,
+	// 	"message": "Successfully fetched product",
+	// 	"product": data,
 	// })
+	return c.Render("update", fiber.Map{
+		"Task": result,
+	})
+}
+
+func updateHandler(c *fiber.Ctx, db *sql.DB) error {
+	newTask := task{}
+	if err := c.BodyParser(&newTask); err != nil {
+		log.Printf("An error occured: %v", err)
+		return c.SendString(err.Error())
+	}
+	// fmt.Printf("%v", newTask)
+	if newTask.Task != "" {
+		fmt.Println(newTask.Task)
+		fmt.Println(newTask.Assignee)
+		fmt.Println(newTask.Deadline)
+		_, err := db.Exec("UPDATE task set task=$1,assignee=$2,deadline=$3,status=$4 WHERE id=$5", newTask.Task, newTask.Assignee, newTask.Deadline, newTask.Status, newTask.Id)
+		if err != nil {
+			log.Fatalf("Gagal simpan, query error : %v", err)
+		}
+	}
+
+	return c.Redirect("/")
 }
 
 func deleteHandler(c *fiber.Ctx, db *sql.DB) error {

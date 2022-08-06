@@ -21,12 +21,24 @@ const (
 	dbname   = "dbtasking"
 )
 
+type Task struct {
+	Id       int    `json: "id"`
+	Task     string `json: "task"`
+	Assignee int    `json: "assigne"`
+	Deadline string `json: "deadline"`
+	Status   int    `json: "status"`
+}
+
+type Tasks struct {
+	Tasks []Task `json: "products"`
+}
+
 type Edit struct {
-	Id       int
-	Task     string
-	Assignee int
-	Deadline string
-	Status   int
+	Id       int    `json: "id"`
+	Task     string `json: "task"`
+	Assignee int    `json: "assigne"`
+	Deadline string `json: "deadline"`
+	Status   int    `json: "status"`
 }
 
 type task struct {
@@ -126,7 +138,7 @@ func postHandler(c *fiber.Ctx, db *sql.DB) error {
 func putHandler(c *fiber.Ctx, db *sql.DB) error {
 	id := c.Query("id")
 	// var id string = "1"
-	result := make([]*Edit, 0)
+	data := Edit{}
 	rows, err := db.Query("SELECT id,task,assignee,deadline,status FROM task WHERE id = $1", id)
 	fmt.Println(id)
 	defer rows.Close()
@@ -135,14 +147,18 @@ func putHandler(c *fiber.Ctx, db *sql.DB) error {
 		c.JSON("An error occured")
 	}
 	for rows.Next() {
-		res := new(Edit)
-		rows.Scan(&res.Id, &res.Task, &res.Assignee, &res.Deadline, &res.Status)
-		result = append(result, res)
+		// res := new(Edit)
+		rows.Scan(&data.Id, &data.Task, &data.Assignee, &data.Deadline, &data.Status)
+		// result = append(result, res)
 	}
 
-	return c.JSON(result)
+	return c.JSON(&fiber.Map{
+		"success": false,
+		"message": "Successfully fetched product",
+		"product": data,
+	})
 	// return c.Render("update", fiber.Map{
-	// 	"Task": result,
+	// 	"Task": data,
 	// })
 }
 

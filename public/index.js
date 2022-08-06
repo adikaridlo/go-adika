@@ -26,7 +26,10 @@ function updateDb(item){
     .then(response => response.json())
     .then(result => {
         // var as = JSON.parse(result);
-        var tes = '{"id":"743222825", "name":"Oscar Jara"}';
-        console.log(JSON.parse(result))
+        // console.log(JSON.parse(result))
+        var data = Object.entries(result);
+        var res = data[1][1];
+        console.log(data[1][1])
+        // window.location.pathname = "/update"
     })
 }

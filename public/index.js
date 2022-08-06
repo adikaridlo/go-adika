@@ -55,3 +55,9 @@ function updateDb(item) {
         console.warn('Something went wrong.', err);
     })
  }
+
+ $(document).ready(function () {
+    $('#table-task').dataTable( {
+        "autoWidth": false
+    });
+});

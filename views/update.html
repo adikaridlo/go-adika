@@ -1,25 +1,37 @@
 <!-- {{range.Task}} -->
-<center>
-    <h1>{{.Task}}</h1>
-</center>
 <div class="row m-1 p-3">
     <div class="col col-11 mx-auto" id="form-id">
         <form action="/update" method="POST" class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
             <div class="row m-1 p-3">
                 <input name="Id" type="hidden" value="{{.Id}}">
-                <input name="Task" value="{{.Task}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
-                <input name="Assignee" value="{{.Assignee}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
-                <input name="Deadline" value="{{.Deadline}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
+                <div class="col-md-3">
+                    <label class="label"><b>Task</b></label>
+                    <input name="Task" value="{{.Task}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
+                </div>
+                <div class="col-md-3">
+                    <label class="label"><b>Assignee</b></label>
+                    <input name="Assignee" value="{{.Assignee}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
+                </div>
+                <div class="col-md-3">
+                    <label class="label"><b>Deadline</b></label>
+                    <input name="Deadline" value="{{.Deadline}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
+                </div>
                 <!-- <input name="Status" value="{{.Status}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status .."> -->
-                <select class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded">
-                    <option>Pilih Status</option>
-                    <option value="1" {{$stat := .Status }} {{if eq $stat 1}} selected {{else}} false {{end}}>Open</option>
-                    <option value="2" {{$stat := .Status }} {{if eq $stat 2}} selected {{else}} false {{end}}>To Do</option>
-                    <option value="3" {{$stat := .Status }} {{if eq $stat 3}} selected {{else}} false {{end}}>Doing</option>
-                   </select>
+                <div class="col-md-3">
+                    <!-- <input name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status .."> -->
+                    <label class="label"><b>Status</b></label>
+                    <select name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded">
+                        <option>Pilih Status</option>
+                        <option value='1' {{$stat := .Status }} {{if eq $stat 1}} selected {{else}} false {{end}}>Open</option>
+                        <option value="2" {{$stat := .Status }} {{if eq $stat 2}} selected {{else}} false {{end}}>To Do</option>
+                        <option value="3" {{$stat := .Status }} {{if eq $stat 3}} selected {{else}} false {{end}}>Doing</option>
+                    </select>
+                </div>
              </div>
-            <div class="row">
+             <div class="row" style="flex: auto;">
+            <div class="col-md-12" style="text-align: right;padding-right: 50px;">
                 <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
             </div>
         </form>
     </div>

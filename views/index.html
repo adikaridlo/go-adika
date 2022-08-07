@@ -32,19 +32,33 @@
            <div class="col col-11 mx-auto" id="form-id">
                <form action="/" method="POST" class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
                    <div class="row m-1 p-3">
-                       <input name="Task" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
-                       <input name="Assignee" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
-                       <input name="Deadline" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
-                       <!-- <input name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status .."> -->
-                       <select class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded">
-                        <option>Pilih Status</option>
-                        <option value="1">Open</option>
-                        <option value="2">To Do</option>
-                        <option value="3">Doing</option>
-                       </select>
+                    <div class="col-md-3">
+                        <label class="label"><b>Task</b></label>
+                        <input name="Task" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
                     </div>
-                   <div class="row">
-                       <button type="submit" class="btn btn-primary">Tambah</button>
+                    <div class="col-md-3">
+                        <label class="label"><b>Assignee</b></label>
+                        <input name="Assignee" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="label"><b>Deadline</b></label>
+                        <input name="Deadline" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
+                    </div>
+                    <div class="col-md-3">
+                        <!-- <input name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status .."> -->
+                        <label class="label"><b>Status</b></label>
+                        <select name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded">
+                         <option>Pilih Status</option>
+                         <option value="1">Open</option>
+                         <option value="2">To Do</option>
+                         <option value="3">Doing</option>
+                        </select>
+                    </div>
+                    </div>
+                   <div class="row" style="flex: auto;">
+                    <div class="col-md-12" style="text-align: right;padding-right: 50px;">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
                    </div>
                </form>
            </div>
@@ -64,7 +78,7 @@
                                 <th>Task</th>
                                 <th>Assignee</th>
                                 <th>Deadline</th>
-                                <th>Status</th>
+                                <th style="text-align: center;">Status</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -75,7 +89,7 @@
                                     <td>{{.Task}}</td>
                                     <td>{{.Assignee}}</td>
                                     <td>{{.Deadline}}</td>
-                                    <td>
+                                    <td style="text-align: center;">
                                         {{$status := .Status}}
                                         {{if eq $status 1}}
                                             <label class="btn btn-primary">Open</label>

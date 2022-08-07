@@ -13,7 +13,7 @@
    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.12.1/datatables.min.css"/>
- 
+   <link rel="stylesheet" type="text/css" href="/css/bootstrap-datepicker.min.css">
    <title>Document</title>
 </head>
 <body>
@@ -42,7 +42,12 @@
                     </div>
                     <div class="col-md-3">
                         <label class="label"><b>Deadline</b></label>
-                        <input name="Deadline" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
+                        <div class="input-group date" data-provide="datepicker">
+                            <input name="Deadline" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <!-- <input name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status .."> -->
@@ -117,7 +122,8 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootlint/1.1.0/bootlint.min.js"></script>
    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="/js/bootstrap-datepicker.min.js"></script>
    <script src="/index.js"></script>
 </body>
 </html>

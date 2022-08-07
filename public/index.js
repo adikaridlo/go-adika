@@ -72,4 +72,7 @@ function updateDb(item) {
             { "width": "100%!important" },
             ]
     });
+    $('.date').datepicker({
+        autoclose: true
+    });
 });

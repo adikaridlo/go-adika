@@ -10,8 +10,13 @@
                 <input name="Task" value="{{.Task}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
                 <input name="Assignee" value="{{.Assignee}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
                 <input name="Deadline" value="{{.Deadline}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
-                <input name="Status" value="{{.Status}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status ..">
-
+                <!-- <input name="Status" value="{{.Status}}" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status .."> -->
+                <select class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded">
+                    <option>Pilih Status</option>
+                    <option value="1" {{$stat := .Status }} {{if eq $stat 1}} selected {{else}} false {{end}}>Open</option>
+                    <option value="2" {{$stat := .Status }} {{if eq $stat 2}} selected {{else}} false {{end}}>To Do</option>
+                    <option value="3" {{$stat := .Status }} {{if eq $stat 3}} selected {{else}} false {{end}}>Doing</option>
+                   </select>
              </div>
             <div class="row">
                 <button type="submit" class="btn btn-primary">Simpan</button>

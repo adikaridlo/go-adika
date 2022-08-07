@@ -35,8 +35,13 @@
                        <input name="Task" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Task ..">
                        <input name="Assignee" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Assignee ..">
                        <input name="Deadline" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Deadline ..">
-                       <input name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status ..">
-
+                       <!-- <input name="Status" class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded" type="text" placeholder="Status .."> -->
+                       <select class="form-control form-control-lg border-1 add-todo-input bg-transparent rounded">
+                        <option>Pilih Status</option>
+                        <option value="1">Open</option>
+                        <option value="2">To Do</option>
+                        <option value="3">Doing</option>
+                       </select>
                     </div>
                    <div class="row">
                        <button type="submit" class="btn btn-primary">Tambah</button>
@@ -66,11 +71,20 @@
                             <tbody>
                                 {{range.Task}}
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{.Id}}</td>
                                     <td>{{.Task}}</td>
                                     <td>{{.Assignee}}</td>
                                     <td>{{.Deadline}}</td>
-                                    <td>{{.Status}}</td>
+                                    <td>
+                                        {{$status := .Status}}
+                                        {{if eq $status 1}}
+                                            <label class="btn btn-primary">Open</label>
+                                        {{else if eq $status 2}}
+                                            <label class="btn btn-warning">To Do</label>
+                                        {{else}}
+                                            <label class="btn btn-success">Doing</label>
+                                        {{end}}
+                                    </td>
                                     <td>
                                         <i onclick="updateDb('{{.Id}}')" class="fa fa-pencil text-warning btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
                                         <i onclick="removeFromDb('{{.Id}}')" class="fa fa-trash-o text-danger btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i>

@@ -42,7 +42,7 @@ type Edit struct {
 }
 
 type task struct {
-	Id       int
+	Id       int `json:"Id" gorm:"default:1"`
 	Task     string
 	Assignee string
 	Deadline string

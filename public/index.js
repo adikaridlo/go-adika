@@ -58,6 +58,18 @@ function updateDb(item) {
 
  $(document).ready(function () {
     $('#table-task').dataTable( {
-        "autoWidth": false
+        "autoWidth": false,
+        // searching: false,
+        // paging: false,
+        // info: false,
+        "autoWidth": false,
+        "columns": [
+            { "width": "20%" },
+            { "width": "100%!important" },
+            { "width": "100%!important" },
+            { "width": "100%!important" },
+            { "width": "100%!important" },
+            { "width": "100%!important" },
+            ]
     });
 });

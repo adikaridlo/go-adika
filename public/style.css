@@ -2,7 +2,9 @@ body {
     font-family: "Open Sans", sans-serif;
     line-height: 1.6;
  }
- 
+ #table-task_wrapper{
+   flex: auto!important;
+ }
  .add-todo-input,
  .edit-todo-input {
     outline: none;

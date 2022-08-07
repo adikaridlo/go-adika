@@ -24,7 +24,7 @@ const (
 type Task struct {
 	Id       int    `json: "id"`
 	Task     string `json: "task"`
-	Assignee int    `json: "assigne"`
+	Assignee string `json: "assigne"`
 	Deadline string `json: "deadline"`
 	Status   int    `json: "status"`
 }
@@ -36,7 +36,7 @@ type Tasks struct {
 type Edit struct {
 	Id       int    `json: "id"`
 	Task     string `json: "task"`
-	Assignee int    `json: "assigne"`
+	Assignee string `json: "assigne"`
 	Deadline string `json: "deadline"`
 	Status   int    `json: "status"`
 }
@@ -44,7 +44,7 @@ type Edit struct {
 type task struct {
 	Id       int
 	Task     string
-	Assignee int
+	Assignee string
 	Deadline string
 	Status   int
 }

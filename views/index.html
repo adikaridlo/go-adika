@@ -88,14 +88,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                                {{range.Task}}
+                                {{range $index, $data:= .Task}}
                                 <tr>
-                                    <td>{{.Id}}</td>
-                                    <td>{{.Task}}</td>
-                                    <td>{{.Assignee}}</td>
-                                    <td>{{.Deadline}}</td>
+                                    <td>{{$index}}</td>
+                                    <td>{{$data.Task}}</td>
+                                    <td>{{$data.Assignee}}</td>
+                                    <td>{{$data.Deadline}}</td>
                                     <td style="text-align: center;">
-                                        {{$status := .Status}}
+                                        {{$status := $data.Status}}
                                         {{if eq $status 1}}
                                             <label class="btn btn-primary">Open</label>
                                         {{else if eq $status 2}}
@@ -105,8 +105,8 @@
                                         {{end}}
                                     </td>
                                     <td>
-                                        <i onclick="updateDb('{{.Id}}')" class="fa fa-pencil text-warning btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
-                                        <i onclick="removeFromDb('{{.Id}}')" class="fa fa-trash-o text-danger btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i>
+                                        <i onclick="updateDb('{{$data.Id}}')" class="fa fa-pencil text-warning btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
+                                        <i onclick="removeFromDb('{{$data.Id}}')" class="fa fa-trash-o text-danger btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Delete todo"></i>
                                     </td>
                                 </tr>
                                 {{end}}

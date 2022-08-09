@@ -75,4 +75,10 @@ function updateDb(item) {
     $('.date').datepicker({
         autoclose: true
     });
+
+    $(".nomor").map(function() {
+        var nomor = Number($(this).text()) + 1;
+
+        $(this).text(nomor);
+    });
 });
